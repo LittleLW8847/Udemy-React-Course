@@ -3,6 +3,7 @@ import componentsImg from './assets/components.png';
 import {CORE_CONCEPTS} from './data.js';
 import Header from './components/Header/Header.jsx';
 import CoreConcept from './components/CoreConcept/CoreConcept.jsx';
+import TabButton from './components/TabButton.jsx';
 
 
 function App() {
@@ -30,6 +31,13 @@ function App() {
           </ul>
         </section>
         <h2>Time to get started!</h2>
+
+        <section id = "example">
+          <h2>Example</h2>
+          <menu>
+            <TabButton>Components</TabButton>
+          </menu>
+        </section>
       </main>
     </div>
   );
