@@ -2,6 +2,7 @@ import { useState} from 'react';
 import { EXAMPLES } from '../data';
 import TabButton from './TabButton';
 import Section from './Section';
+import Tabs from './Tabs';
 
 export default function Examples(){
 
@@ -30,13 +31,16 @@ export default function Examples(){
 
     return(
         <Section title="examples" id="examples">
-          <menu>
-            <TabButton onClick={()=>handleSelect('components')} isSelect={selectedTopic === 'components'}>Components</TabButton>
-            <TabButton onClick={()=>handleSelect('jsx')} isSelect={selectedTopic === 'jsx'}>JSX</TabButton>
-            <TabButton onClick={()=>handleSelect('props')} isSelect={selectedTopic === 'props'}>Props</TabButton>
-            <TabButton onClick={()=>handleSelect('state')} isSelect={selectedTopic === 'state'}>States</TabButton>
-          </menu>
-          {tabContent} {/* alternative 3 */}
+            <Tabs buttons={
+                <>
+                    <TabButton onClick={()=>handleSelect('components')} isSelect={selectedTopic === 'components'}>Components</TabButton>
+                    <TabButton onClick={()=>handleSelect('jsx')} isSelect={selectedTopic === 'jsx'}>JSX</TabButton>
+                    <TabButton onClick={()=>handleSelect('props')} isSelect={selectedTopic === 'props'}>Props</TabButton>
+                    <TabButton onClick={()=>handleSelect('state')} isSelect={selectedTopic === 'state'}>States</TabButton>
+                </>
+            }>{tabContent}</Tabs>
+          
+          {/* alternative 3 */}
           
           {/*{!selectedTopic && <p>please select a topic</p>}   alternative 2
           {selectedTopic? 
