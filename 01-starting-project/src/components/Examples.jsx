@@ -1,7 +1,7 @@
 import { useState} from 'react';
 import { EXAMPLES } from '../data';
 import TabButton from './TabButton';
-
+import Section from './Section';
 
 export default function Examples(){
 
@@ -29,13 +29,12 @@ export default function Examples(){
     }
 
     return(
-        <section id = "examples">
-          <h2>Example</h2>
+        <Section title="examples" id="examples">
           <menu>
-            <TabButton onSelect={()=>handleSelect('components')} isSelect={selectedTopic === 'components'}>Components</TabButton>
-            <TabButton onSelect={()=>handleSelect('jsx')} isSelect={selectedTopic === 'jsx'}>JSX</TabButton>
-            <TabButton onSelect={()=>handleSelect('props')} isSelect={selectedTopic === 'props'}>Props</TabButton>
-            <TabButton onSelect={()=>handleSelect('state')} isSelect={selectedTopic === 'state'}>States</TabButton>
+            <TabButton onClick={()=>handleSelect('components')} isSelect={selectedTopic === 'components'}>Components</TabButton>
+            <TabButton onClick={()=>handleSelect('jsx')} isSelect={selectedTopic === 'jsx'}>JSX</TabButton>
+            <TabButton onClick={()=>handleSelect('props')} isSelect={selectedTopic === 'props'}>Props</TabButton>
+            <TabButton onClick={()=>handleSelect('state')} isSelect={selectedTopic === 'state'}>States</TabButton>
           </menu>
           {tabContent} {/* alternative 3 */}
           
@@ -61,6 +60,6 @@ export default function Examples(){
             </code>
           </pre>
           </div>*/ }
-        </section>
+        </Section>
     );
 }
