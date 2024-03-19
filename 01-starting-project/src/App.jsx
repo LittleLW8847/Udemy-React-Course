@@ -1,45 +1,81 @@
+import { useState,Fragment } from 'react';
 
 import componentsImg from './assets/components.png';
-import {CORE_CONCEPTS} from './data.js';
+import CoreConcepts from './components/CoreConcepts.jsx';
 import Header from './components/Header/Header.jsx';
-import CoreConcept from './components/CoreConcept/CoreConcept.jsx';
+
 import TabButton from './components/TabButton.jsx';
+import {EXAMPLES} from './data.js'
 
 
 function App() {
+  const [selectedTopic, setSelectedTopic] = useState('');
+
+  let tabContent = <p>please select a topic</p>;
+
+  if(selectedTopic){
+    tabContent = <div id = "tab-content">
+    <h3>{EXAMPLES[selectedTopic].title}</h3>
+    <p>{EXAMPLES[selectedTopic].description}</p>
+    <pre>
+      <code>
+        {EXAMPLES[selectedTopic].code}
+      </code>
+    </pre>
+  </div>
+  }
+
+  function handleSelect(selectedButton){
+    // selectedButton => 'components', 'jsx', 'props', 'state'
+    tabContent = selectedButton;
+    setSelectedTopic(selectedButton)
+    console.log(selectedTopic);
+}
+  
+  console.log('APP COMPONENT EXECUTING')
+
   return (
-    <div>
+    <>
       
       <Header />
       <main>
-        <section id="core-concepts">
-          <h2>core concept!</h2>
-          <ul>
-            <CoreConcept title={CORE_CONCEPTS[0].title} 
-            description={CORE_CONCEPTS[0].description}
-            image={CORE_CONCEPTS[0].image}/>
-
-            <CoreConcept {...CORE_CONCEPTS[1]}/>
-
-            <CoreConcept title={CORE_CONCEPTS[2].title} 
-            description={CORE_CONCEPTS[2].description} 
-            image={CORE_CONCEPTS[2].image} />
-
-            <CoreConcept title={CORE_CONCEPTS[3].title} 
-            description={CORE_CONCEPTS[3].description} 
-            image={CORE_CONCEPTS[3].image} />
-          </ul>
-        </section>
-        <h2>Time to get started!</h2>
-
-        <section id = "example">
+        <CoreConcepts/>
+        <section id = "examples">
           <h2>Example</h2>
           <menu>
-            <TabButton>Components</TabButton>
+            <TabButton onSelect={()=>handleSelect('components')} isSelect={selectedTopic === 'components'}>Components</TabButton>
+            <TabButton onSelect={()=>handleSelect('jsx')} isSelect={selectedTopic === 'jsx'}>JSX</TabButton>
+            <TabButton onSelect={()=>handleSelect('props')} isSelect={selectedTopic === 'props'}>Props</TabButton>
+            <TabButton onSelect={()=>handleSelect('state')} isSelect={selectedTopic === 'state'}>States</TabButton>
           </menu>
+          {tabContent} {/* alternative 3 */}
+          
+          {/*{!selectedTopic && <p>please select a topic</p>}   alternative 2
+          {selectedTopic? 
+          <div id = "tab-content">
+          <h3>{EXAMPLES[selectedTopic].title}</h3>
+          <p>{EXAMPLES[selectedTopic].description}</p>
+          <pre>
+            <code>
+              {EXAMPLES[selectedTopic].code}
+            </code>
+          </pre>
+          </div>:null}*/}
+
+          {/*{!selectedTopic? <p>please select a topic</p>:
+          <div id = "tab-content">
+          <h3>{EXAMPLES[selectedTopic].title}</h3>
+          <p>{EXAMPLES[selectedTopic].description}</p>
+          <pre>
+            <code>
+              {EXAMPLES[selectedTopic].code}
+            </code>
+          </pre>
+          </div>*/ }
+          
         </section>
       </main>
-    </div>
+    </>
   );
 }
 
