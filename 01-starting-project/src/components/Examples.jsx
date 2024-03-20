@@ -38,7 +38,7 @@ export default function Examples(){
                     <TabButton onClick={()=>handleSelect('props')} isSelect={selectedTopic === 'props'}>Props</TabButton>
                     <TabButton onClick={()=>handleSelect('state')} isSelect={selectedTopic === 'state'}>States</TabButton>
                 </>
-            }>{tabContent}</Tabs>
+            } buttonContainer="menu">{tabContent}</Tabs>
           
           {/* alternative 3 */}
           
